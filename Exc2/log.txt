@@ -1,0 +1,50 @@
+kubectl top pod
+
+NAME                            CPU(cores)   MEMORY(bytes)
+scaletestapp-5f7db66594-2t7lc   1m           2Mi
+scaletestapp-5f7db66594-fg958   2m           6Mi
+scaletestapp-5f7db66594-hznml   14m          15Mi
+scaletestapp-5f7db66594-pbbwm   1m           2Mi
+scaletestapp-5f7db66594-z894g   7m           10Mi
+
+kubectl describe deployment scaletestapp
+
+Name:                   scaletestapp
+Namespace:              default
+CreationTimestamp:      Tue, 05 Nov 2024 11:47:19 +0300
+Labels:                 app=scaletestapp
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=scaletestapp
+Replicas:               5 desired | 5 updated | 5 total | 5 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=scaletestapp
+  Containers:
+   scaletestapp:
+    Image:      shestera/scaletestapp
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Requests:
+      memory:      10Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   scaletestapp-5f7db66594 (5/5 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  50m    deployment-controller  Scaled up replica set scaletestapp-5f7db66594 to 1
+  Normal  ScalingReplicaSet  14m    deployment-controller  Scaled up replica set scaletestapp-5f7db66594 to 2 from 1
+  Normal  ScalingReplicaSet  10m    deployment-controller  Scaled up replica set scaletestapp-5f7db66594 to 3 from 2
+  Normal  ScalingReplicaSet  4m18s  deployment-controller  Scaled up replica set scaletestapp-5f7db66594 to 4 from 3
+  Normal  ScalingReplicaSet  2m18s  deployment-controller  Scaled up replica set scaletestapp-5f7db66594 to 5 from 4
